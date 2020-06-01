@@ -1,0 +1,13 @@
+#content-group {
+    height: 300px;
+}
+
+div,
+.female_voice {
+    width: 95px;
+    margin: 10px auto;
+}
+
+.button {
+    cursor: pointer;
+}
