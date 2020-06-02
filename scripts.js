@@ -30,8 +30,7 @@ function GetOption(options) {
   var radioHtml = "";
   options.forEach((option) => {
     radioHtml += '<input type="radio" id="' + option.code + '"  name= "bopomo" value=' + option.code + ">";
-    radioHtml += '<label class="option-label" id="' + option.code + '" for="' + option.code + '">' + option.url + '</label>';
-    radioHtml += "<br>";
+    radioHtml += '<label class="option-label" id="' + option.code + '" for="' + option.code + '"></label>';
   });
   optionsObj.innerHTML = radioHtml;
 }
@@ -52,12 +51,11 @@ function shuffArray(array) {
   return array;
 }
 
-
 window.onload = function () {
   const submitObj = document.querySelector("#submit-button");
   submitObj.addEventListener("click", GetTask, false);
 
-  const optionBoj = document.getElementById("optionDiv");
+  const optionBoj = document.querySelector("#optionDiv");
   optionBoj.addEventListener("click", function (e) {
     var index = options.findIndex(obj => obj.code == e.target.id);
     var sound = new Howl({
