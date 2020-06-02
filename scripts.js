@@ -1,3 +1,20 @@
+var options = new Array(0);
+
+const submitObj = document.querySelector("#submit-button");
+submitObj.addEventListener("click", GetTask, false);
+
+
+const optionBoj = document.getElementById("optionDiv");
+optionBoj.addEventListener("click", function (e) {
+  var index = data.findIndex(obj => obj.code == e.target.id);
+  var sound = new Howl({
+    src: [options[index].url]
+  });
+
+  sound.play();
+}, false);
+
+
 function GetTask() {
   var xmlHttp = new XMLHttpRequest();
   var jsonUrl = "bopomo.json";
@@ -5,15 +22,14 @@ function GetTask() {
     if (this.readyState == 4 && this.status == 200) {
       var bopomoArr = JSON.parse(this.responseText);
       var bopomoIndex = Math.floor(Math.random() * 37);
-      var options = new Array(0);
       var AnswerObj = bopomoArr[bopomoIndex];
-      options.push(AnswerObj);
+      options[0] = AnswerObj;
       document.getElementById("showMsg").textContent = AnswerObj.code;
 
       for (i = 1; i < 4; i++) {
         var optionIndex = Math.floor(Math.random() * 37);
         var optionObj = bopomoArr[optionIndex];
-        options.push(optionObj);
+        options[i] = optionObj;
       }
 
       GetOption(shuffArray(options));
@@ -29,7 +45,7 @@ function GetOption(options) {
   var radioHtml = "";
   options.forEach((option) => {
     radioHtml += '<input type="radio" id="' + option.code + '"  name= "bopomo" value=' + option.code + ">";
-    radioHtml += '<label class="option-label" for="' + option.code + '">' + option.url + '</label>';
+    radioHtml += '<label class="option-label" id="' + option.code + '" for="' + option.code + '">' + option.url + '</label>';
     radioHtml += "<br>";
   });
   optionsObj.innerHTML = radioHtml;
@@ -49,12 +65,4 @@ function shuffArray(array) {
   }
 
   return array;
-}
-
-function VoicePlay() {
-  var sound = new Howl({
-    src: ["https://stroke-order.learningweb.moe.edu.tw/bopomo_sound/M/M1.WAV"],
-  });
-
-  sound.play();
 }
