@@ -1,20 +1,5 @@
 var options = new Array(0);
 
-const submitObj = document.querySelector("#submit-button");
-submitObj.addEventListener("click", GetTask, false);
-
-
-const optionBoj = document.getElementById("optionDiv");
-optionBoj.addEventListener("click", function (e) {
-  var index = data.findIndex(obj => obj.code == e.target.id);
-  var sound = new Howl({
-    src: [options[index].url]
-  });
-
-  sound.play();
-}, false);
-
-
 function GetTask() {
   var xmlHttp = new XMLHttpRequest();
   var jsonUrl = "bopomo.json";
@@ -66,3 +51,19 @@ function shuffArray(array) {
 
   return array;
 }
+
+
+window.onload = function () {
+  const submitObj = document.querySelector("#submit-button");
+  submitObj.addEventListener("click", GetTask, false);
+
+  const optionBoj = document.getElementById("optionDiv");
+  optionBoj.addEventListener("click", function (e) {
+    var index = options.findIndex(obj => obj.code == e.target.id);
+    var sound = new Howl({
+      src: [options[index].url]
+    });
+
+    sound.play();
+  }, false);
+};
