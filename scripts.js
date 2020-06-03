@@ -92,12 +92,16 @@ function shuffArray(array) {
 
 function GetScore() {
   var scoreLabel = document.querySelector("#score-label");
-  scoreLabel.textContent = 'Tubli power : ' + bopomoCnt + '/37';
+  scoreLabel.textContent = 'Tubli power : ' + bopomoCnt;
+  var testCnt = document.querySelector('#header-label');
+  testCnt.textContent = (bopomoCnt + worngCnt) + '/37';
 }
 
 function GetWrong() {
   var scoreLabel = document.querySelector("#wrong-label");
-  scoreLabel.textContent = 'Ei Tubli : ' + worngCnt + '/37';
+  scoreLabel.textContent = 'Ei Tubli : ' + worngCnt;
+  var testCnt = document.querySelector('#header-label');
+  testCnt.textContent = (bopomoCnt + worngCnt) + '/37';
 }
 
 window.onload = function () {
