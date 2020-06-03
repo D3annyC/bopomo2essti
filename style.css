@@ -1,9 +1,9 @@
 #content-group {
-    height: 300px;
+    height: 500px;
 }
 
 .option-label {
-    background-image: '/imgs/voice.png';
+    background-image: url('/imgs/voice.png');
 }
 
 .optionDiv input {

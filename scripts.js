@@ -1,21 +1,34 @@
 var options = new Array(0);
+var optionsIndex = new Array(0);
 
 function GetTask() {
   var xmlHttp = new XMLHttpRequest();
   var jsonUrl = "bopomo.json";
+
+  while (optionsIndex.length < 4) {
+    var r = Math.floor(Math.random() * 37);
+    if (optionsIndex.includes(r)) {
+      continue;
+    } else {
+      optionsIndex.push(r);
+    }
+  }
+  options = [];
+
   xmlHttp.onreadystatechange = function () {
     if (this.readyState == 4 && this.status == 200) {
       var bopomoArr = JSON.parse(this.responseText);
-      var bopomoIndex = Math.floor(Math.random() * 37);
-      var AnswerObj = bopomoArr[bopomoIndex];
-      options[0] = AnswerObj;
-      document.getElementById("showMsg").textContent = AnswerObj.code;
+      var AnswerObj = bopomoArr[optionsIndex[0]];
+      options.push(AnswerObj);
+      optionsIndex.shift();
 
-      for (i = 1; i < 4; i++) {
-        var optionIndex = Math.floor(Math.random() * 37);
-        var optionObj = bopomoArr[optionIndex];
-        options[i] = optionObj;
-      }
+      var QuestionImg = '<img src="/imgs/' + AnswerObj.code + '.png">';
+      document.getElementById("showMsg").innerHTML = QuestionImg;
+
+      optionsIndex.forEach((index) => {
+        var optionObj = bopomoArr[index];
+        options.push(optionObj);
+      });
 
       GetOption(shuffArray(options));
     }

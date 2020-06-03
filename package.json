@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/D3annyC/bopomo2essti#readme",
   "dependencies": {
-    "howler": "^2.2.0"
+    "howler": "^2.2.0",
+    "utf8": "^3.0.0"
   }
 }
