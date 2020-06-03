@@ -1,5 +1,6 @@
-var options = new Array(0);
-var optionsIndex = new Array(0);
+let options = [4];
+let optionsIndex = [4];
+let answerCode = "";
 
 function GetTask() {
   var xmlHttp = new XMLHttpRequest();
@@ -19,10 +20,11 @@ function GetTask() {
     if (this.readyState == 4 && this.status == 200) {
       var bopomoArr = JSON.parse(this.responseText);
       var AnswerObj = bopomoArr[optionsIndex[0]];
+      answerCode = AnswerObj.code;
       options.push(AnswerObj);
       optionsIndex.shift();
 
-      var QuestionImg = '<img src="/imgs/' + AnswerObj.code + '.png">';
+      var QuestionImg = '<img id="' + AnswerObj.code + '" src="/imgs/' + AnswerObj.code + '.png">';
       document.getElementById("showMsg").innerHTML = QuestionImg;
 
       optionsIndex.forEach((index) => {
@@ -42,8 +44,8 @@ function GetOption(options) {
   optionsObj.innerHTML = "";
   var radioHtml = "";
   options.forEach((option) => {
-    radioHtml += '<input type="radio" id="' + option.code + '"  name= "bopomo" value=' + option.code + ">";
-    radioHtml += '<label class="option-label" id="' + option.code + '" for="' + option.code + '"></label>';
+    radioHtml += '<input type="radio" id="input-' + option.code + '"  name= "bopomo" value=' + option.code + ">";
+    radioHtml += '<label class="option-label" for="input-' + option.code + '"></label>';
   });
   optionsObj.innerHTML = radioHtml;
 }
@@ -65,16 +67,31 @@ function shuffArray(array) {
 }
 
 window.onload = function () {
-  const submitObj = document.querySelector("#submit-button");
-  submitObj.addEventListener("click", GetTask, false);
+  const startObj = document.querySelector("#start-button");
+  startObj.addEventListener("click", GetTask, false);
 
   const optionBoj = document.querySelector("#optionDiv");
   optionBoj.addEventListener("click", function (e) {
-    var index = options.findIndex(obj => obj.code == e.target.id);
+    var selectedId = e.target.id;
+    var index = options.findIndex(obj => obj.code == selectedId.substring(selectedId.length - 4, selectedId.length));
     var sound = new Howl({
       src: [options[index].url]
     });
 
     sound.play();
   }, false);
+
+  const submitObj = document.querySelector("#submit-button");
+  submitObj.addEventListener('click', function () {
+    var answer = document.querySelector('img[id="' + answerCode + '"]').id;
+    var score = document.querySelector('input[name="bopomo"]:checked').value;
+    if (score != answer) {
+      alert('Oops, Try again...');
+      return false;
+    }
+    else {
+      alert('Correct! Tubli!');
+      GetTask();
+    }
+  });
 };
