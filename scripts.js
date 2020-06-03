@@ -93,15 +93,20 @@ function shuffArray(array) {
 function GetScore() {
   var scoreLabel = document.querySelector("#score-label");
   scoreLabel.textContent = 'Tubli power : ' + bopomoCnt;
-  var testCnt = document.querySelector('#header-label');
-  testCnt.textContent = (bopomoCnt + worngCnt) + '/37';
+  ProgressCnt();
 }
 
 function GetWrong() {
   var scoreLabel = document.querySelector("#wrong-label");
   scoreLabel.textContent = 'Ei Tubli : ' + worngCnt;
-  var testCnt = document.querySelector('#header-label');
-  testCnt.textContent = (bopomoCnt + worngCnt) + '/37';
+  ProgressCnt();
+}
+
+function ProgressCnt() {
+  var progress = bopomoCnt + worngCnt;
+  var elem = document.getElementById("bar-div");
+  elem.style.width = ((progress / 37) * 100) + "%";
+  elem.innerHTML = (bopomoCnt + worngCnt) + '/37';
 }
 
 window.onload = function () {
