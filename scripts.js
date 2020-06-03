@@ -2,10 +2,15 @@ let options = [4];
 let optionsIndex = [3];
 let answerCode = "";
 let bopomoCnt = 0;
+let worngCnt = 0;
 let leftBopomo;
 let flag = true;
 
 function GetTask() {
+  if ((bopomoCnt + worngCnt) == 37) {
+    alert("FINISHED TEST,TUBLI!");
+    return false;
+  }
   var xmlHttp = new XMLHttpRequest();
   var jsonUrl = "bopomo.json";
 
@@ -35,13 +40,13 @@ function GetTask() {
       leftBopomo = leftBopomo.filter(function (obj) {
         return obj.code !== answerCode;
       });
-      var logStr = "";
-      var logCnt = 1;
-      leftBopomo.forEach((obj) => {
-        logStr += logCnt + JSON.stringify(obj) + '<br>';
-        logCnt++;
-      });
-      document.getElementById('log-label').innerHTML = logStr;
+      // var logStr = "";
+      // var logCnt = 1;
+      // leftBopomo.forEach((obj) => {
+      //   logStr += logCnt + JSON.stringify(obj) + '<br>';
+      //   logCnt++;
+      // });
+      // document.getElementById('log-label').innerHTML = logStr;
 
       var QuestionImg = '<img id="' + AnswerObj.code + '" src="/imgs/' + AnswerObj.code + '.png">';
       document.getElementById("showMsg").innerHTML = QuestionImg;
@@ -87,7 +92,12 @@ function shuffArray(array) {
 
 function GetScore() {
   var scoreLabel = document.querySelector("#score-label");
-  scoreLabel.textContent = bopomoCnt + '/37';
+  scoreLabel.textContent = 'Tubli power : ' + bopomoCnt + '/37';
+}
+
+function GetWrong() {
+  var scoreLabel = document.querySelector("#wrong-label");
+  scoreLabel.textContent = 'Ei Tubli : ' + worngCnt + '/37';
 }
 
 window.onload = function () {
@@ -112,7 +122,10 @@ window.onload = function () {
     var answer = document.querySelector('img[id="' + answerCode + '"]').id;
     var score = document.querySelector('input[name="bopomo"]:checked').value;
     if (score != answer) {
-      alert('Oops, Try again...');
+      alert('Oops, ei tubli :(');
+      worngCnt++;
+      GetWrong();
+      GetTask();
       return false;
     }
     else {
