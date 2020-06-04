@@ -49,7 +49,7 @@ function GetTask() {
       // });
       // document.getElementById('log-label').innerHTML = logStr;
 
-      var QuestionImg = '<img id="' + AnswerObj.code + '" src="{{site.url}}/images/' + AnswerObj.code + '.png">';
+      var QuestionImg = '<img id="' + AnswerObj.code + '" src="./images/' + AnswerObj.code + '.png">';
       document.getElementById("showMsg").innerHTML = QuestionImg;
 
       optionsIndex.forEach((index) => {
