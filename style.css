@@ -3,7 +3,7 @@
 }
 
 .option-label {
-    background-image: url('/imgs/voice.png');
+    background-image: url('./images/voice.png');
 }
 
 .optionDiv input {
