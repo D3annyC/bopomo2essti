@@ -5,6 +5,7 @@ let bopomoCnt = 0;
 let worngCnt = 0;
 let leftBopomo;
 let flag = true;
+let progressWidth = 0.0;
 
 function GetTask() {
   if ((bopomoCnt + worngCnt) == 37) {
@@ -91,22 +92,29 @@ function shuffArray(array) {
 }
 
 function GetScore() {
-  var scoreLabel = document.querySelector("#score-label");
+  const scoreLabel = document.querySelector("#score-label");
   scoreLabel.textContent = 'Tubli power : ' + bopomoCnt;
   ProgressCnt();
 }
 
 function GetWrong() {
-  var scoreLabel = document.querySelector("#wrong-label");
+  const scoreLabel = document.querySelector("#wrong-label");
   scoreLabel.textContent = 'Ei Tubli : ' + worngCnt;
   ProgressCnt();
 }
 
 function ProgressCnt() {
-  var progress = bopomoCnt + worngCnt;
-  var elem = document.getElementById("bar-div");
-  elem.style.width = ((progress / 37) * 100) + "%";
-  elem.innerHTML = (bopomoCnt + worngCnt) + '/37';
+  const progress = bopomoCnt + worngCnt;
+  const elem = document.getElementById("bar-div");
+  var inProgress = setInterval(function () {
+    progressWidth += 0.54;
+    elem.style.width = progressWidth + "%";
+    if ((progressWidth % 2.7) == 0.0) {
+      clearInterval(inProgress);
+    }
+  }, 80);
+  if (progress) { elem.style.width = "100%"; }
+  elem.innerHTML = progress + '/37';
 }
 
 window.onload = function () {
@@ -128,8 +136,8 @@ window.onload = function () {
 
   const submitObj = document.querySelector("#submit-button");
   submitObj.addEventListener('click', function () {
-    var answer = document.querySelector('img[id="' + answerCode + '"]').id;
-    var score = document.querySelector('input[name="bopomo"]:checked').value;
+    const answer = document.querySelector('img[id="' + answerCode + '"]').id;
+    const score = document.querySelector('input[name="bopomo"]:checked').value;
     if (score != answer) {
       alert('Oops, ei tubli :(');
       worngCnt++;
