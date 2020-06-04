@@ -107,13 +107,13 @@ function ProgressCnt() {
   const progress = bopomoCnt + worngCnt;
   const elem = document.getElementById("bar-div");
   var inProgress = setInterval(function () {
-    progressWidth += 0.54;
-    elem.style.width = progressWidth + "%";
-    if ((progressWidth % 2.7) == 0.0) {
+    progressWidth += 54;
+    elem.style.width = (progressWidth / 100) + "%";
+    if ((progressWidth % 270) == 0) {
       clearInterval(inProgress);
     }
   }, 80);
-  if (progress) { elem.style.width = "100%"; }
+  if (progress == 9990) { elem.style.width = "100%"; }
   elem.innerHTML = progress + '/37';
 }
 
