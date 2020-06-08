@@ -8,10 +8,7 @@ let flag = true;
 let progressWidth = 0.0;
 
 function GetTask() {
-  if ((bopomoCnt + worngCnt) == 37) {
-    alert("FINISHED TEST,TUBLI!");
-    return false;
-  }
+
   var xmlHttp = new XMLHttpRequest();
   var jsonUrl = "bopomo.json";
 
@@ -136,6 +133,10 @@ window.onload = function () {
 
   const submitObj = document.querySelector("#submit-button");
   submitObj.addEventListener('click', function () {
+    if ((bopomoCnt + worngCnt) == 37) {
+      alert("FINISHED TEST,TUBLI!");
+      return false;
+    }
     const answer = document.querySelector('img[id="' + answerCode + '"]').id;
     const score = document.querySelector('input[name="bopomo"]:checked').value;
     if (score != answer) {
