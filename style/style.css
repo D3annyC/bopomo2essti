@@ -1,3 +1,7 @@
+body {
+  background-color: #f2f2f2;
+}
+
 /*----------------------------*
  * main page
  *----------------------------*/
@@ -16,6 +20,7 @@ div.mode-container {
 
 .mode-container:hover {
   background-color: #918c8c;
+  cursor: pointer;
 }
 
 #mainContainer {
