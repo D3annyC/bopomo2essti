@@ -1,20 +1,27 @@
 {
   "name": "bopomo2essti",
-  "version": "0.0.0",
-  "private": true,
+  "version": "1.0.0",
+  "description": "You can use the [editor on GitHub](https://github.com/D3annyC/bopomo2essti/edit/master/README.md) to maintain and preview the content for your website in Markdown files.",
+  "main": "app.js",
   "scripts": {
-    "start": "node app",
-    "dev": "nodemon app"
+    "start": "node www",
+    "dev": "nodemon www"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/D3annyC/bopomo2essti.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/D3annyC/bopomo2essti/issues"
+  },
+  "homepage": "https://github.com/D3annyC/bopomo2essti#readme",
   "dependencies": {
-    "cookie-parser": "~1.4.4",
-    "debug": "~2.6.9",
-    "express": "~4.16.1",
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
     "express-handlebars": "^4.0.4",
-    "http-errors": "~1.6.3",
-    "jade": "~1.11.0",
-    "moment": "^2.26.0",
-    "morgan": "~1.9.1"
+    "path": "^0.12.7"
   },
   "devDependencies": {
     "nodemon": "^2.0.4"

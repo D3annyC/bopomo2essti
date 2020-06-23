@@ -1,29 +1,42 @@
 const express = require('express');
 const app = express();
-const exphbs = require('express-handlebars');
+const expbs = require('express-handlebars');
 const path = require('path');
-const logger = require('./middleware/logger');
-const bopomo = require('./public/bopomo');
 
 const PORT = process.env.PORT || 3000;
-
-// Loogger
-app.use(logger);
-
-// Handlebars Middleware
-app.engine('handlebars', exphbs());
-app.set('view engine', 'handlebars');
-
-// Build Main page Router
-app.get('/', (req, res) => {
-    res.render('index', { bopomo });
+const hbs = expbs.create({
+    defaultLayout: 'main',
+    layoutsDir: path.join(__dirname, 'views/layouts')
 });
 
-// Set static folder
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static('public'));
 
-// API Routes
-app.use('/api/bopomo', require('./routes/api/bopomo'));
+// Set up templet engining
+app.engine('handlebars', hbs.engine);
+app.set('view engine', 'handlebars');
+
+// Router
+const router = express.Router();
+app.use('/', router);
+
+router.get('/', (req, res) => {
+    res.render('index',
+        {
+            tittle: '大家來學ㄅㄆㄇ',
+            style: 'style.css'
+        });
+});
+
+router.get('/bopomo2voice', (req, res) => {
+    res.render('bopomo2voice',
+        {
+            tittle: '大家來學ㄅㄆㄇ',
+            style: 'style.css'
+        });
+});
+
+// // Loogger
+// app.use(logger);
 
 
 app.listen(PORT, () => console.log(`Server runs on port ${PORT}`));
