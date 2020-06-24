@@ -8,12 +8,9 @@ let flag = true;
 let progressWidth = 0.0;
 
 function GetTask() {
-  if ((bopomoCnt + worngCnt) == 37) {
-    alert("FINISHED TEST,TUBLI!");
-    return false;
-  }
+
   var xmlHttp = new XMLHttpRequest();
-  var jsonUrl = "bopomo.json";
+  var jsonUrl = '/bopomo.json';
 
   while (optionsIndex.length < 3) {
     var r = Math.floor(Math.random() * 37);
@@ -49,7 +46,7 @@ function GetTask() {
       // });
       // document.getElementById('log-label').innerHTML = logStr;
 
-      var QuestionImg = '<img id="' + AnswerObj.code + '" src="./images/' + AnswerObj.code + '.png">';
+      var QuestionImg = '<img id="' + AnswerObj.code + '" src="images/bopomo/' + AnswerObj.code + '.png">';
       document.getElementById("showMsg").innerHTML = QuestionImg;
 
       optionsIndex.forEach((index) => {
@@ -136,6 +133,10 @@ window.onload = function () {
 
   const submitObj = document.querySelector("#submit-button");
   submitObj.addEventListener('click', function () {
+    if ((bopomoCnt + worngCnt) == 37) {
+      alert("FINISHED TEST,TUBLI!");
+      return false;
+    }
     const answer = document.querySelector('img[id="' + answerCode + '"]').id;
     const score = document.querySelector('input[name="bopomo"]:checked').value;
     if (score != answer) {
