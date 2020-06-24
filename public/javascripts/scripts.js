@@ -10,7 +10,7 @@ let progressWidth = 0.0;
 function GetTask() {
 
   var xmlHttp = new XMLHttpRequest();
-  var jsonUrl = "bopomo.json";
+  var jsonUrl = '/bopomo.json';
 
   while (optionsIndex.length < 3) {
     var r = Math.floor(Math.random() * 37);
@@ -46,7 +46,7 @@ function GetTask() {
       // });
       // document.getElementById('log-label').innerHTML = logStr;
 
-      var QuestionImg = '<img id="' + AnswerObj.code + '" src="./images/' + AnswerObj.code + '.png">';
+      var QuestionImg = '<img id="' + AnswerObj.code + '" src="images/bopomo/' + AnswerObj.code + '.png">';
       document.getElementById("showMsg").innerHTML = QuestionImg;
 
       optionsIndex.forEach((index) => {

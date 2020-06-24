@@ -1,4 +1,14 @@
 body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: hsl(197, 100%, 50%);
+}
+
+
+body {
   background-color: #f2f2f2;
 }
 
